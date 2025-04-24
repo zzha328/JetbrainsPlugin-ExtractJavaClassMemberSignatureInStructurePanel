@@ -21,7 +21,8 @@ jobs:
         run: ./gradlew buildPlugin
 
       - name: Publish to Marketplace
-        uses: JetBrains/marketplace-actions@v1
-        with:
-          token: ${{ secrets.JB_MARKETPLACE_TOKEN }}
-          zip-path: "build/distributions/ExtractJavaClassMemberSignatureInStructurePanel-*.zip"
+        run: |
+          curl -i --fail --header "Authorization: Bearer ${{ secrets.JB_MARKETPLACE_TOKEN }}" \
+            -F "pluginId=com.zzha0328.ExtractJavaClassMemberSignatureInStructurePanel" \
+            -F "file=@build/distributions/ExtractJavaClassMemberSignatureInStructurePanel-*.zip" \
+            "https://plugins.jetbrains.com/plugin/uploadPlugin"

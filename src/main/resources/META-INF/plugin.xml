@@ -1,0 +1,52 @@
+<idea-plugin>
+    <id>com.zzha0328.ExtractJavaClassMemberSignatureInStructurePanel</id>
+
+    <name>ExtractJavaClassMemberSignatureInStructurePanel</name>
+    <version>0.1.0</version>
+
+    <vendor email="bobby.zzha@outlook.com"
+            url="https://github.com/zzha328/JetbrainsPlugin-ExtractJavaClassMemberSignatureInStructurePanel"
+    >
+        zzha0328
+    </vendor>
+
+    <description>
+        <![CDATA[
+            <p>A plugin for allowing for copying Java class member signatures when selected in structure panel.</p>
+            <p><strong>Usage: </strong>Right-click one or multiple members in the structure panel and select
+                "Copy Signature", or use the hotkey <code>Ctrl+Alt+C</code> to apply.</p>
+            <p><strong>Notice: </strong>This plugin will only work on members within a Java class.</p>
+            <p><strong>Disclaimer: </strong>I'm a freshman upon exploring the realm of Jetbrains plugin,
+                so it is inevitable that this plugin has limits. Feel free to discuss.</p>
+        ]]>
+    </description>
+
+    <change-notes>
+        <![CDATA[
+            <ul>
+                <li>v0.1.0: Initial release with basic signature copy functionality.</li>
+            </ul>
+        ]]>
+    </change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>  <!-- this is a must -->
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup displayType="BALLOON" id="CopyMemberSignatureNotificationGroup" isLogByDefault="true"/>
+    </extensions>
+    <actions>
+        <action id="ExtractJavaClassMemberSignatureInStructurePanel.CopyMemberSignature"
+                class="com.zzha0328.ExtractMemberSignature.CopyMemberSignature"
+                text="Copy Signature"
+                description="Copy the signature of this member."
+                icon="AllIcons.Actions.Copy"
+        >
+            <add-to-group group-id="StructureViewPopupMenu" anchor="first"/>
+            <keyboard-shortcut
+                    keymap="$default"
+                    first-keystroke="ctrl alt c"
+                    replace-all="true"/>
+        </action>
+    </actions>
+</idea-plugin>

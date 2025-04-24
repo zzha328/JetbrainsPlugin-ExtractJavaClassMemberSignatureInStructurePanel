@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "ExtractMemberSignature"
+rootProject.name = "ExtractJavaClassMemberSignatureInStructurePanel"

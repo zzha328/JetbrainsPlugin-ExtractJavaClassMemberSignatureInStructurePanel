@@ -1,0 +1,27 @@
+name: Publish Plugin to JetBrains Marketplace
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Plugin (Gradle)
+        run: ./gradlew buildPlugin
+
+      - name: Publish to Marketplace
+        uses: JetBrains/marketplace-actions@v1
+        with:
+          token: ${{ secrets.JB_MARKETPLACE_TOKEN }}
+          zip-path: "build/distributions/ExtractJavaClassMemberSignatureInStructurePanel-*.zip"
